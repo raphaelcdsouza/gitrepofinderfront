@@ -2,6 +2,8 @@ import React, { useState, useCallback } from 'react';
 
 import api from '../../services/api';
 
+import Input from '../../components/Input';
+
 const Dashboard = () => {
   const [repos, setRepos] = useState([]);
   const [inputValue, setInputValue] = useState('');
@@ -46,11 +48,9 @@ const Dashboard = () => {
       <h1>GitHub Finder</h1>
 
       <form onSubmit={handleFormSubmit}>
-        <input type="text" name="repo" onChange={handleInputChange} />
+        <Input type="text" name="repo" error={error} onChange={handleInputChange} />
         <button type="submit">Procurar</button>
       </form>
-
-      {error && <span>{error}</span>}
 
       {repos.length > 0 && (
         <>
