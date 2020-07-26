@@ -1,8 +1,13 @@
 import React, { useState, useCallback } from 'react';
+import { AiOutlineLoading } from 'react-icons/ai';
+import { GoStar } from 'react-icons/go';
 
 import api from '../../services/api';
 
 import Input from '../../components/Input';
+import Avatar from '../../components/Avatar';
+
+import { Container, Form, Content, RepoItem, RepoItemInfo } from './styles';
 
 const Dashboard = () => {
   const [repos, setRepos] = useState([]);
@@ -44,35 +49,44 @@ const Dashboard = () => {
   }, [inputValue]);
 
   return (
-    <>
+    <Container>
       <h1>GitHub Finder</h1>
 
-      <form onSubmit={handleFormSubmit}>
+      <Form onSubmit={handleFormSubmit}>
         <Input type="text" name="repo" error={error} placeholder="Digite o nome do usuário" onChange={handleInputChange} />
         <button type="submit">Procurar</button>
-      </form>
+      </Form>
 
       {repos.length > 0 && (
-        <>
-          <h2>Repositórios de <span>{repoOwner.name}</span></h2>
+        loading ? <AiOutlineLoading size={40} /> : (
+          <Content>
+            <Avatar src={repoOwner.avatar_url} alt={repoOwner.name}/>
 
-          {loading ? <p>Carregando...</p> : (
+            <h2>Repositórios de <strong>{repoOwner.name}</strong></h2>
+
             <ul>
               {repos.map(repo => (
-              <li key={repo.id}>
-                <div>
+                <RepoItem key={repo.id}>
                   <strong>{repo.name}</strong>
-                  {repo.description && <p>{repo.description}</p>}
-                  <a href={repo.html_url}>Link para o repositório</a>
-                  <p><span>{repo.stargazers_count}</span> Número de estrelas</p>
-                </div>
-              </li>
-            ))}
-          </ul>)}
-        </>
+
+                  <RepoItemInfo>
+                    <div>
+                      {repo.description && <p>{repo.description}</p>}
+                      <span>
+                        {repo.stargazers_count}
+                        <GoStar size={20} />
+                      </span> 
+                    </div>
+                    <a href={repo.html_url}>Link para o repositório</a>
+                  </RepoItemInfo>
+                </RepoItem>
+              ))}
+            </ul>
+          </Content>
+        )
       )}
 
-    </>
+    </Container>
   );
 };
 
