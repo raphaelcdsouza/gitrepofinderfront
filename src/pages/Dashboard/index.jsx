@@ -48,7 +48,7 @@ const Dashboard = () => {
       <h1>GitHub Finder</h1>
 
       <form onSubmit={handleFormSubmit}>
-        <Input type="text" name="repo" error={error} onChange={handleInputChange} />
+        <Input type="text" name="repo" error={error} placeholder="Digite o nome do usuário" onChange={handleInputChange} />
         <button type="submit">Procurar</button>
       </form>
 
