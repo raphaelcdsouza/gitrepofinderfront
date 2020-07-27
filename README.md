@@ -4,12 +4,12 @@
 Clone this repository into your computer:
 ```sh
 # Using SSH
-git clone git@github.com:raphaelcdsouza/gitrepofinder.git
+git clone git@github.com:raphaelcdsouza/gitrepofinderfront.git
 
 # OR
 
 # Using HTTPS
-git clone https://github.com/raphaelcdsouza/gitrepofinder.git
+git clone https://github.com/raphaelcdsouza/gitrepofinderfront.git
 ```
 Navigate inside ```gitrepofinder``` directory:
 ```sh
