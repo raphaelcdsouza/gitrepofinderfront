@@ -5,7 +5,7 @@ const GithubAuthContext = createContext({});
 export const GithubAuthProvider = ({ children }) => {
   const [data, setData] = useState({});
 
-  const setUserData = useCallback((access_token, user) => {
+  const setUserData = useCallback(({ access_token, user }) => {
     setData({
       access_token,
       user,
