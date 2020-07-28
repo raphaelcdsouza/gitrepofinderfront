@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
+import { GithubAuthProvider } from './hooks/githubAuth';
+
 import Dashboard from './pages/Dashboard';
 import Callback from './pages/Callback';
 
@@ -10,10 +12,12 @@ function App() {
   return (
     <Router>
       <GlobalStyles />
-      <Switch>
-        <Route path="/" exact component={Dashboard} />
-        <Route path="/callback" exact component={Callback} />
-      </Switch>
+      <GithubAuthProvider>
+        <Switch>
+          <Route path="/" exact component={Dashboard} />
+          <Route path="/callback" exact component={Callback} />
+        </Switch>
+      </GithubAuthProvider>
     </Router>
   )
 }
