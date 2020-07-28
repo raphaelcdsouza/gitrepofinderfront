@@ -51,6 +51,7 @@ const Dashboard = () => {
   return (
     <Container>
       <h1>GitHub Finder</h1>
+      <a href="https://github.com/login/oauth/authorize?client_id=84ddb13f8f7f968b202c&scope=user:email">Conectar Github</a>
 
       <Form onSubmit={handleFormSubmit}>
         <Input type="text" name="repo" error={error} placeholder="Digite o nome do usuário" onChange={handleInputChange} />
