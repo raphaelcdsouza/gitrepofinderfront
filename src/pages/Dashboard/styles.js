@@ -68,6 +68,8 @@ export const GithubAvatar = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    background: #9f9f9f;
     height: 50px;
     width: 50px;
     object-fit: cover;
@@ -76,6 +78,7 @@ export const GithubAvatar = styled.div`
     margin-left: -40px;
     margin-right: 6px;
     border: 3px solid rgb(113, 89, 193);
+    z-index: 999;
 
     img {
       height: 50px;
