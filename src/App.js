@@ -10,15 +10,16 @@ import GlobalStyles from './styles/global';
 
 function App() {
   return (
-    <Router>
-      <GlobalStyles />
-      <GithubAuthProvider>
+    <GithubAuthProvider>
+      <Router>
+        <GlobalStyles />
+
         <Switch>
           <Route path="/" exact component={Dashboard} />
           <Route path="/callback" exact component={Callback} />
         </Switch>
-      </GithubAuthProvider>
-    </Router>
+      </Router>
+    </GithubAuthProvider>
   )
 }
 
