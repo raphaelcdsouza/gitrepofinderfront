@@ -1,29 +1,28 @@
 import React, {useEffect} from 'react';
+import { useHistory } from 'react-router-dom';
 
-import api from '../../services/api';
 
 import useQuery from '../../hooks/query';
+import { useGithubAuth } from '../../hooks/githubAuth';
 
 const Callback = () => {
   const query = useQuery();
+  const { setUserData, user } = useGithubAuth();
+  const history = useHistory();
 
   useEffect(() => {
     async function auth() {
       const code = query.get('code');
 
-      try { 
-        const response = await api.post('http://localhost:3333/github-authenticate', {
-          code,
-        });
+      await setUserData(code);
 
-        console.log(response.data);
-      }catch (err) {
-        console.log(err);
-      }
+      history.push('/');
     }
 
-    auth();
-  }, [query]);
+    if (!user) {
+      auth();
+    }
+  }, [query, setUserData, history, user]);
 
   return <h1>Callback page</h1>
 };
