@@ -1,15 +1,22 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
 
+import api from '../services/api';
+
 const GithubAuthContext = createContext({});
 
 export const GithubAuthProvider = ({ children }) => {
   const [data, setData] = useState({});
 
-  const setUserData = useCallback(({ access_token, user }) => {
-    setData({
-      access_token,
-      user,
-    });
+  const setUserData = useCallback(async (code) => {
+    try {
+      const response = await api.post('http://localhost:3333/github-authenticate', {
+        code,
+      });
+
+      setData(response.data);
+    } catch(err) {
+      console.log(err);
+    }
   }, []);
 
   return (
