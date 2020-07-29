@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { AiOutlineLoading } from 'react-icons/ai';
+import { FiGithub } from 'react-icons/fi';
 import { GoStar } from 'react-icons/go';
 
 import api from '../../services/api';
@@ -7,7 +8,9 @@ import api from '../../services/api';
 import Input from '../../components/Input';
 import Avatar from '../../components/Avatar';
 
-import { Container, Form, Content, RepoItem, RepoItemInfo } from './styles';
+import { useGithubAuth } from '../../hooks/githubAuth';
+
+import { Container, Form, Content, RepoItem, RepoItemInfo, GithubAvatar } from './styles';
 
 const Dashboard = () => {
   const [repos, setRepos] = useState([]);
@@ -15,6 +18,8 @@ const Dashboard = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [repoOwner, setRepoOwner] = useState({});
+
+  const { user } = useGithubAuth();
 
   const handleInputChange = useCallback(event => {
     setInputValue(event.target.value);
@@ -50,8 +55,22 @@ const Dashboard = () => {
 
   return (
     <Container>
-      <h1>GitHub Finder</h1>
-      <a href="https://github.com/login/oauth/authorize?client_id=84ddb13f8f7f968b202c&scope=user:email">Conectar Github</a>
+      <div>
+        <h1>GitHub Finder</h1>
+        {!user ? (
+          <a href="https://github.com/login/oauth/authorize?client_id=84ddb13f8f7f968b202c&scope=user:email">
+            Conectar Github
+          </a>
+        ) : (
+          <GithubAvatar>
+            <div>
+              <img src={user.avatar_url} alt={user.login}/>
+            </div>
+            <FiGithub size={19} />
+            {user.login}
+          </GithubAvatar>
+        )}
+      </div>
 
       <Form onSubmit={handleFormSubmit}>
         <Input type="text" name="repo" error={error} placeholder="Digite o nome do usuário" onChange={handleInputChange} />
