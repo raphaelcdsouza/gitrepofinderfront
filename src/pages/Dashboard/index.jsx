@@ -35,7 +35,7 @@ const Dashboard = () => {
         throw new Error('É necessário preencher o nome do usuário');
       }
       
-      const [user, repos] = await Promise.all([api.get(`users/${inputValue}`), api.get(`users/${inputValue}/repos`)])
+      const [user, repos] = await Promise.all([api.get(`users/${inputValue}`), api.get(`users/${inputValue}/repos`)]);
 
       setRepos(repos.data);
       setRepoOwner(user.data);
