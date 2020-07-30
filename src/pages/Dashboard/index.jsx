@@ -58,7 +58,7 @@ const Dashboard = () => {
       <div>
         <h1>GitHub Finder</h1>
         {!user ? (
-          <a href="https://github.com/login/oauth/authorize?client_id=84ddb13f8f7f968b202c&scope=user:email">
+          <a href="https://github.com/login/oauth/authorize?client_id=Iv1.915c3848b25b8c28">
             Conectar Github
           </a>
         ) : (
