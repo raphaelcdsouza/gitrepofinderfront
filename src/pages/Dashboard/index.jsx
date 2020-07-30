@@ -1,16 +1,16 @@
 import React, { useState, useCallback } from 'react';
 import { AiOutlineLoading } from 'react-icons/ai';
 import { FiGithub } from 'react-icons/fi';
-import { GoStar } from 'react-icons/go';
 
 import api from '../../services/api';
 
 import Input from '../../components/Input';
 import Avatar from '../../components/Avatar';
+import RepoItem from '../../components/RepoItem';
 
 import { useGithubAuth } from '../../hooks/githubAuth';
 
-import { Container, Form, Content, RepoItem, RepoItemInfo, GithubAvatar } from './styles';
+import { Container, Form, Content, GithubAvatar } from './styles';
 
 const Dashboard = () => {
   const [repos, setRepos] = useState([]);
@@ -86,20 +86,7 @@ const Dashboard = () => {
 
             <ul>
               {repos.map(repo => (
-                <RepoItem key={repo.id}>
-                  <strong>{repo.name}</strong>
-
-                  <RepoItemInfo>
-                    <div>
-                      {repo.description && <p>{repo.description}</p>}
-                      <span>
-                        {repo.stargazers_count}
-                        <GoStar size={20} />
-                      </span> 
-                    </div>
-                    <a href={repo.html_url}>Link para o repositório</a>
-                  </RepoItemInfo>
-                </RepoItem>
+                <RepoItem key={repo.id} repo={repo} />
               ))}
             </ul>
           </Content>
